@@ -39,3 +39,4 @@ variable "instance_id" {
 variable "availability_zones" {
   type = list(string)
 }
+

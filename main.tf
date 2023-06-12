@@ -12,6 +12,6 @@ module "networking" {
 }
 
 module "ec2" {
-  source     = "./ec2"
-  ec2_subnet = module.networking.private_subnet_id[0]
+  source                = "./ec2"
+  ec2_subnet            = module.networking.private_subnet_id[0]
 }

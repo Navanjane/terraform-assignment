@@ -166,3 +166,41 @@ resource "aws_lb_target_group_attachment" "test" {
   target_id        = var.instance_id
   port             = 80
 }
+
+
+resource "aws_network_acl" "EC2_Private_NACL" {
+  vpc_id = aws_vpc.test-vpc.id
+
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "10.0.0.0/16"
+    from_port  = 80
+    to_port    = 80
+  }
+
+  tags = {
+    Name = "EC2_Private_NACL"
+  }
+}
+
+
+resource "aws_network_acl" "ALB_Public_NACL" {
+  vpc_id = aws_vpc.test-vpc.id
+
+
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 80
+    to_port    = 80
+  }
+
+  tags = {
+    Name = "EC2_Private_NACL"
+  }
+}
